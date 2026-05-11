@@ -3,496 +3,438 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zijie Wu — 吴子杰</title>
+<title>吴子杰 — Zijie Wu</title>
 <style>
-  /* ========== RESET & BASE ========== */
-  *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
-  html { scroll-behavior:smooth; }
-  body {
-    font-family: "Inter", "PingFang SC", "Microsoft YaHei", sans-serif;
-    background: #0a0a0f;
-    color: #d4d4dc;
-    line-height: 1.7;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
+  /* ===== RESET ===== */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Inter","PingFang SC","Microsoft YaHei",sans-serif;
+    background:#faf8f5;
+    color:#2c2c30;
+    line-height:1.8;
+    -webkit-font-smoothing:antialiased;
   }
-  a { color: inherit; text-decoration: none; }
+  a{color:inherit;text-decoration:none}
 
-  /* ========== PARTICLES BG ========== */
-  #particles {
-    position: fixed; inset: 0; z-index: 0;
-    pointer-events: none;
+  /* ===== NAV ===== */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    padding:24px 48px;
+    display:flex;justify-content:space-between;align-items:center;
+    background:rgba(250,248,245,0.85);backdrop-filter:blur(12px);
   }
+  nav .logo{font-size:15px;font-weight:600;color:#3a3a42;letter-spacing:.5px}
+  nav .links{display:flex;gap:36px;list-style:none}
+  nav .links a{font-size:13px;color:#8a8a90;letter-spacing:.5px;transition:color .2s}
+  nav .links a:hover{color:#3a3a42}
 
-  /* ========== NAV ========== */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    padding: 20px 40px;
-    display: flex; justify-content: space-between; align-items: center;
-    mix-blend-mode: difference;
+  /* ===== SECTIONS ===== */
+  section{max-width:880px;margin:0 auto;padding:100px 40px}
+
+  /* ===== HERO ===== */
+  .hero{
+    min-height:100vh;display:flex;align-items:center;
+    padding-top:0;padding-bottom:0;
   }
-  nav .logo { font-size: 20px; font-weight: 700; color: #fff; letter-spacing: 1px; }
-  nav .links { display: flex; gap: 32px; list-style: none; }
-  nav .links a { font-size: 14px; color: #aaa; transition: color .2s; letter-spacing: 0.5px; }
-  nav .links a:hover { color: #fff; }
-
-  /* ========== SECTIONS ========== */
-  section { position: relative; z-index: 1; padding: 120px 40px; max-width: 900px; margin: 0 auto; }
-
-  /* ========== HERO ========== */
-  .hero {
-    min-height: 100vh;
-    display: flex; flex-direction: column; justify-content: center;
-    padding-top: 0;
+  .hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;width:100%}
+  .hero-text .hello{font-size:15px;color:#8a8a90;margin-bottom:16px;letter-spacing:.5px}
+  .hero-text h1{font-size:clamp(44px,6vw,80px);font-weight:700;line-height:1.15;color:#222228;margin-bottom:20px}
+  .hero-text .tagline{font-size:17px;color:#7a7a82;max-width:360px;line-height:1.7}
+  .hero-visual{
+    display:flex;justify-content:center;align-items:center;
   }
-  .hero .eyebrow { font-size: 14px; letter-spacing: 4px; color: #8b8b99; text-transform: uppercase; margin-bottom: 24px; opacity: 0; animation: fadeUp 0.8s ease forwards; }
-  .hero h1 { font-size: clamp(48px, 8vw, 96px); font-weight: 800; color: #f0f0f5; line-height: 1.1; margin-bottom: 16px; opacity: 0; animation: fadeUp 0.8s 0.15s ease forwards; }
-  .hero .subtitle { font-size: clamp(18px, 3vw, 24px); color: #6b6b7a; font-weight: 400; max-width: 500px; opacity: 0; animation: fadeUp 0.8s 0.3s ease forwards; }
-  .hero .scroll-hint {
-    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
-    color: #4a4a55; font-size: 12px; letter-spacing: 2px;
-    animation: bounce 2s infinite;
+  .hero-blob{
+    width:280px;height:280px;border-radius:50%;
+    background:linear-gradient(135deg,#d4d0e8 0%,#e8d5c8 30%,#c8dae8 60%,#e2d8c8 100%);
+    filter:blur(40px);opacity:.7;
+    animation:float 8s ease-in-out infinite;
   }
-
-  /* ========== SECTION HEADERS ========== */
-  .section-header { margin-bottom: 60px; }
-  .section-header .num { font-size: 13px; color: #5a5a6e; letter-spacing: 2px; margin-bottom: 8px; }
-  .section-header h2 { font-size: clamp(28px, 5vw, 42px); font-weight: 700; color: #e8e8ee; }
-
-  /* ========== ABOUT ========== */
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-  .about-grid p { color: #9a9aaa; font-size: 16px; }
-  .about-grid .highlight { color: #e8e8ee; font-weight: 500; }
-
-  /* ========== PROJECTS ========== */
-  .project-list { display: flex; flex-direction: column; gap: 1px; }
-  .project-card {
-    display: grid; grid-template-columns: 1fr 2fr 1fr;
-    padding: 28px 0;
-    border-top: 1px solid #1a1a28;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-  }
-  .project-card:hover { background: rgba(255,255,255,0.02); margin: 0 -20px; padding-left: 20px; padding-right: 20px; border-radius: 8px; border-top-color: transparent; }
-  .project-card:hover + .project-card { border-top-color: transparent; }
-  .project-card .p-year { color: #5a5a6e; font-size: 13px; }
-  .project-card .p-name { font-size: 18px; font-weight: 600; color: #e0e0e8; }
-  .project-card .p-desc { color: #7a7a8a; font-size: 14px; margin-top: 4px; }
-  .project-card .p-tags { display: flex; gap: 8px; justify-content: flex-end; align-items: center; flex-wrap: wrap; }
-  .project-card .p-tags span { font-size: 11px; color: #6a6a7a; background: #14141f; padding: 4px 10px; border-radius: 4px; letter-spacing: 0.5px; }
-
-  /* ========== SOCIAL / LINKS ========== */
-  .social-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .social-link {
-    display: flex; align-items: center; gap: 14px;
-    padding: 20px 24px;
-    background: #111118;
-    border: 1px solid #1c1c2a;
-    border-radius: 12px;
-    transition: all 0.25s ease;
-    cursor: pointer;
-  }
-  .social-link:hover { background: #181820; border-color: #3a3a50; transform: translateY(-2px); }
-  .social-link .s-icon { font-size: 24px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: #1a1a25; border-radius: 10px; }
-  .social-link .s-label { font-size: 13px; color: #8a8a9a; }
-  .social-link .s-name { font-size: 15px; font-weight: 600; color: #d0d0d8; }
-
-  /* ========== FOOTER ========== */
-  footer {
-    text-align: center; padding: 60px 40px;
-    color: #4a4a55; font-size: 13px; letter-spacing: 1px;
-    position: relative; z-index: 1;
+  @keyframes float{
+    0%,100%{transform:translateY(0) scale(1)}
+    50%{transform:translateY(-20px) scale(1.05)}
   }
 
-  /* ========== EASTER EGG MODAL ========== */
-  .egg-modal {
-    position: fixed; inset: 0; z-index: 200;
-    background: rgba(0,0,0,0.85);
-    display: flex; align-items: center; justify-content: center;
-    opacity: 0; pointer-events: none;
-    transition: opacity 0.3s ease;
-  }
-  .egg-modal.show { opacity: 1; pointer-events: auto; }
-  .egg-modal .egg-content {
-    background: #16161f; border: 1px solid #2a2a3a;
-    border-radius: 16px; padding: 40px;
-    max-width: 480px; text-align: center;
-    transform: translateY(20px);
-    transition: transform 0.3s ease;
-  }
-  .egg-modal.show .egg-content { transform: translateY(0); }
-  .egg-modal h3 { font-size: 32px; margin-bottom: 12px; }
-  .egg-modal p { color: #8a8a9a; margin-bottom: 24px; }
-  .egg-modal button {
-    padding: 10px 28px; background: #2a2a3e; color: #ccc; border: none;
-    border-radius: 8px; cursor: pointer; font-size: 14px; transition: background .2s;
-  }
-  .egg-modal button:hover { background: #3a3a55; }
+  /* ===== SECTION HEADERS ===== */
+  .sec-label{font-size:12px;color:#b0b0b8;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
+  .sec-title{font-size:clamp(26px,4vw,38px);font-weight:700;color:#222228;margin-bottom:48px;letter-spacing:-.3px}
 
-  /* ========== CLICK COUNTER BADGE ========== */
-  .click-badge {
-    position: fixed; bottom: 24px; right: 24px; z-index: 50;
-    width: 44px; height: 44px; border-radius: 50%;
-    background: #16161f; border: 1px solid #2a2a3a;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer; transition: all .2s;
-    font-size: 11px; color: #5a5a6e;
-  }
-  .click-badge:hover { border-color: #5a5a7e; color: #aaa; }
+  /* ===== ABOUT ===== */
+  .about-text{max-width:640px}
+  .about-text p{font-size:16px;color:#5a5a62;margin-bottom:20px;line-height:1.9}
+  .about-text .em{color:#3a3a42;font-weight:500}
 
-  /* ========== TOAST ========== */
-  .toast {
-    position: fixed; bottom: 80px; right: 24px; z-index: 150;
-    padding: 12px 20px; background: #1a1a2e; border: 1px solid #3a3a55;
-    border-radius: 8px; font-size: 13px; color: #ccc;
-    opacity: 0; transform: translateY(10px);
-    transition: all 0.3s ease; pointer-events: none;
-  }
-  .toast.show { opacity: 1; transform: translateY(0); }
+  /* ===== VALUES ===== */
+  .values{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:48px}
+  .value-card{padding:32px 28px;background:#fff;border-radius:14px;border:1px solid #eee}
+  .value-card .v-icon{font-size:28px;margin-bottom:14px}
+  .value-card .v-title{font-size:16px;font-weight:600;color:#333;margin-bottom:8px}
+  .value-card .v-desc{font-size:13px;color:#999;line-height:1.7}
 
-  /* ========== ANIMATIONS ========== */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes bounce {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(8px); }
-  }
+  /* ===== JOURNEY / TIMELINE ===== */
+  .timeline{position:relative;padding-left:28px}
+  .timeline::before{content:"";position:absolute;left:0;top:4px;bottom:4px;width:1px;background:#e0dcd4}
+  .tl-item{margin-bottom:40px;position:relative}
+  .tl-item::before{content:"";position:absolute;left:-31px;top:8px;width:7px;height:7px;border-radius:50%;background:#c8c0b0}
+  .tl-item .tl-dates{font-size:13px;color:#b0a89a;letter-spacing:.5px;margin-bottom:6px}
+  .tl-item .tl-title{font-size:18px;font-weight:600;color:#333;margin-bottom:4px}
+  .tl-item .tl-desc{font-size:14px;color:#8a8a90;max-width:500px}
 
-  /* ========== MOBILE ========== */
-  @media (max-width: 768px) {
-    nav { padding: 16px 20px; }
-    section { padding: 80px 20px; }
-    .about-grid { grid-template-columns: 1fr; }
-    .project-card { grid-template-columns: 1fr; gap: 8px; }
-    .project-card .p-tags { justify-content: flex-start; }
-    .social-grid { grid-template-columns: 1fr; }
-    .hero h1 { font-size: 42px; }
+  /* ===== PROJECTS ===== */
+  .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  .proj-card{
+    background:#fff;border:1px solid #eee;border-radius:14px;
+    padding:28px;cursor:pointer;
+    transition:all .25s ease;
+  }
+  .proj-card:hover{border-color:#d0c8c0;transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,0.04)}
+  .proj-card .proj-icon{font-size:24px;margin-bottom:14px}
+  .proj-card .proj-name{font-size:16px;font-weight:600;color:#333;margin-bottom:6px}
+  .proj-card .proj-desc{font-size:13px;color:#999;line-height:1.7;margin-bottom:14px}
+  .proj-card .proj-tags{display:flex;gap:6px;flex-wrap:wrap}
+  .proj-card .proj-tags span{font-size:11px;color:#aaa;background:#f5f3f0;padding:3px 10px;border-radius:4px}
+
+  /* ===== SOCIAL ===== */
+  .social-list{display:flex;flex-wrap:wrap;gap:12px}
+  .social-item{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 22px;background:#fff;border:1px solid #eee;
+    border-radius:10px;font-size:14px;color:#555;transition:all .2s
+  }
+  .social-item:hover{border-color:#c8c0b8;color:#333;transform:translateY(-1px)}
+  .social-item .si-icon{font-size:16px}
+
+  /* ===== FOOTER ===== */
+  footer{
+    max-width:880px;margin:0 auto;padding:60px 40px;
+    display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;
+    border-top:1px solid #e8e4dc;
+    font-size:13px;color:#aaa;
+  }
+  footer .ft-label{font-size:11px;color:#c0beb8;letter-spacing:2px;margin-bottom:12px;text-transform:uppercase}
+  footer .ft-link{display:block;color:#999;margin-bottom:6px;transition:color .2s}
+  footer .ft-link:hover{color:#555}
+  footer .ft-aphorism{color:#bbb;line-height:1.8;font-style:italic}
+
+  /* ===== MODAL ===== */
+  .egg-modal{
+    position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.5);
+    display:flex;align-items:center;justify-content:center;
+    opacity:0;pointer-events:none;transition:opacity .3s
+  }
+  .egg-modal.show{opacity:1;pointer-events:auto}
+  .egg-modal .egg-content{
+    background:#fff;border-radius:16px;padding:40px;
+    max-width:440px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.12);
+    transform:translateY(20px);transition:transform .3s
+  }
+  .egg-modal.show .egg-content{transform:translateY(0)}
+  .egg-modal h3{font-size:36px;margin-bottom:12px}
+  .egg-modal p{color:#8a8a8a;margin-bottom:24px;line-height:1.7}
+  .egg-modal button{
+    padding:10px 32px;background:#f0f0f0;color:#555;border:none;
+    border-radius:8px;cursor:pointer;font-size:14px;transition:background .2s
+  }
+  .egg-modal button:hover{background:#e0e0e0}
+
+  /* ===== TOAST ===== */
+  .toast{
+    position:fixed;bottom:40px;left:50%;transform:translateX(-50%);z-index:150;
+    padding:12px 24px;background:#fff;border:1px solid #e0dcd4;border-radius:10px;
+    font-size:13px;color:#555;box-shadow:0 4px 20px rgba(0,0,0,0.06);
+    opacity:0;pointer-events:none;transition:all .3s
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(-8px)}
+
+  /* ===== SECRET SPOT ===== */
+  .secret-spot{
+    position:fixed;bottom:20px;right:20px;z-index:50;
+    width:36px;height:36px;border-radius:50%;
+    background:transparent;cursor:pointer;transition:all .3s;
+  }
+  .secret-spot:hover{background:rgba(0,0,0,0.03)}
+
+  /* ===== MOBILE ===== */
+  @media(max-width:768px){
+    nav{padding:16px 20px}
+    nav .links{gap:20px}
+    section{padding:60px 20px}
+    .hero-inner{grid-template-columns:1fr;gap:40px}
+    .hero-blob{width:200px;height:200px}
+    .values{grid-template-columns:1fr}
+    .projects-grid{grid-template-columns:1fr}
+    .timeline{padding-left:20px}
+    footer{grid-template-columns:1fr;gap:24px}
   }
 </style>
 </head>
 <body>
 
-<!-- Particles canvas -->
-<canvas id="particles"></canvas>
-
 <!-- Navigation -->
 <nav>
-  <div class="logo">ZW</div>
+  <a href="#" class="logo">Zijie Wu</a>
   <ul class="links">
-    <li><a href="#about">关于</a></li>
-    <li><a href="#projects">作品</a></li>
-    <li><a href="#social">链接</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#journey">Journey</a></li>
+    <li><a href="#works">Works</a></li>
+    <li><a href="#links">Links</a></li>
   </ul>
 </nav>
 
 <!-- Hero -->
-<section class="hero" id="hero">
-  <p class="eyebrow">Personal Website</p>
-  <h1>吴子杰</h1>
-  <p class="subtitle">构建工具，探索系统，在互联网公海修筑一座私人小岛。</p>
-  <div class="scroll-hint" id="scrollHint">↓ 向下探索</div>
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="hello">嗨，我是</p>
+      <h1>吴子杰</h1>
+      <p class="tagline">构建工具，也构建生活。<br>在互联网公海上拥有一座私人小岛。</p>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-blob"></div>
+    </div>
+  </div>
 </section>
 
 <!-- About -->
 <section id="about">
-  <div class="section-header">
-    <p class="num">01</p>
-    <h2>关于我</h2>
+  <p class="sec-label">About ME!</p>
+  <h2 class="sec-title">关于我</h2>
+  <div class="about-text">
+    <p>我是一个<span class="em">全栈工程师</span>，工作在 Linux 桌面，热衷于<span class="em">AI 工具链</span>和<span class="em">机械 CAD</span>的交叉地带。</p>
+    <p>我相信工具的力量——好的工具能放大人的创造力。模型路由、Agent 系统、参数化建模，都是我在捣鼓的领域。不忙的时候，我喜欢探索开源项目，把各种奇怪的工具组合在一起，看看会发生什么。</p>
+    <p>这个网站是手工写的，零框架、零构建。它不完美，但它一直在生长，就像我一样。</p>
   </div>
-  <div class="about-grid">
-    <div>
-      <p>你好，我是 <span class="highlight">吴子杰</span>，一名全栈工程师，工作在 Linux 环境，专注于 <span class="highlight">AI 工具链</span>和<span class="highlight">机械 CAD 建模</span>的交叉领域。</p>
+
+  <div class="values">
+    <div class="value-card">
+      <div class="v-icon">🔧</div>
+      <div class="v-title">工具信念</div>
+      <div class="v-desc">好的工具让创意翻倍。我享受找到那个「刚好解决问题」的工具，然后把它做到极致。</div>
     </div>
-    <div>
-      <p>我相信工具的力量——好的工具能放大创造力。目前在做模型路由、Agent 系统、参数化建模相关的工作。业余时间喜欢探索开源项目，折腾各种有趣的工具组合。</p>
+    <div class="value-card">
+      <div class="v-icon">🌊</div>
+      <div class="v-title">持续探索</div>
+      <div class="v-desc">从 Blender 到 build123d，从深色到亮色主题——方向可以变，但探索不会停。</div>
+    </div>
+    <div class="value-card">
+      <div class="v-icon">🏝️</div>
+      <div class="v-title">私人领域</div>
+      <div class="v-desc">互联网不该只有平台和算法。这里是我的小岛，没有推荐引擎，只有我想分享的东西。</div>
     </div>
   </div>
 </section>
 
-<!-- Projects -->
-<section id="projects">
-  <div class="section-header">
-    <p class="num">02</p>
-    <h2>项目作品</h2>
-  </div>
-  <div class="project-list">
-    <div class="project-card" data-project="cc-switch">
-      <span class="p-year">2026</span>
-      <div>
-        <div class="p-name">cc-switch 模型路由</div>
-        <p class="p-desc">多模型供应商动态切换代理，支持 Claude/Codex/Gemini/Hermes 多平台路由</p>
-      </div>
-      <div class="p-tags"><span>Go</span><span>SQLite</span><span>Proxy</span></div>
+<!-- Journey -->
+<section id="journey">
+  <p class="sec-label">Journey & Milestones</p>
+  <h2 class="sec-title">来时路</h2>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dates">现在</div>
+      <div class="tl-title">AI 工具链探索</div>
+      <div class="tl-desc">cc-switch 模型路由 · Hermes Agent 诊断 · 多模型供应商调度</div>
     </div>
-    <div class="project-card" data-project="mechanical-cad">
-      <span class="p-year">2026</span>
-      <div>
-        <div class="p-name">Mechanical CAD Skill</div>
-        <p class="p-desc">基于 build123d 的参数化机械零件建模工具链，支持 STEP/STL 导出与 Three.js 3D 预览</p>
-      </div>
-      <div class="p-tags"><span>Python</span><span>build123d</span><span>Three.js</span></div>
+    <div class="tl-item">
+      <div class="tl-dates">2026</div>
+      <div class="tl-title">Mechanical CAD 工作流</div>
+      <div class="tl-desc">从 Blender MCP 失败到 build123d + Three.js，参数化机械建模终于上了正轨</div>
     </div>
-    <div class="project-card" data-project="hermes">
-      <span class="p-year">2026</span>
-      <div>
-        <div class="p-name">Hermes Agent 诊断</div>
-        <p class="p-desc">多模型 Agent 系统故障诊断与修复，401 认证问题根因定位，fallback 链路优化</p>
-      </div>
-      <div class="p-tags"><span>Python</span><span>Debug</span><span>Multi-Model</span></div>
+    <div class="tl-item">
+      <div class="tl-dates">2025</div>
+      <div class="tl-title">全栈开发</div>
+      <div class="tl-desc">Next.js + TypeScript + Tailwind · Python FastAPI · 前后端一体</div>
     </div>
-    <div class="project-card" data-project="personal-site">
-      <span class="p-year">2026</span>
-      <div>
-        <div class="p-name">个人网站</div>
-        <p class="p-desc">你现在看到的这个网站——手工打造，内置彩蛋，持续生长中</p>
-      </div>
-      <div class="p-tags"><span>HTML</span><span>CSS</span><span>JS</span></div>
+    <div class="tl-item">
+      <div class="tl-dates">更早</div>
+      <div class="tl-title">从 Hello World 开始</div>
+      <div class="tl-desc">好奇心驱动，一路走到这里。故事还在继续。</div>
     </div>
   </div>
 </section>
 
-<!-- Social -->
-<section id="social">
-  <div class="section-header">
-    <p class="num">03</p>
-    <h2>找到我</h2>
+<!-- Works -->
+<section id="works">
+  <p class="sec-label">Works & Projects</p>
+  <h2 class="sec-title">摸索与建造</h2>
+  <div class="projects-grid">
+    <div class="proj-card" data-proj="cc-switch">
+      <div class="proj-icon">🔄</div>
+      <div class="proj-name">cc-switch 模型路由</div>
+      <div class="proj-desc">多模型供应商动态切换代理，让 Claude/Codex/Gemini 在不同后端间无缝流转。</div>
+      <div class="proj-tags"><span>Go</span><span>SQLite</span><span>Proxy</span></div>
+    </div>
+    <div class="proj-card" data-proj="mech-cad">
+      <div class="proj-icon">⚙️</div>
+      <div class="proj-name">Mechanical CAD Skill</div>
+      <div class="proj-desc">build123d 参数化建模 + Three.js 预览，从 STEP/STL 导出到浏览器交互旋转。</div>
+      <div class="proj-tags"><span>Python</span><span>build123d</span><span>Three.js</span></div>
+    </div>
+    <div class="proj-card" data-proj="hermes">
+      <div class="proj-icon">🕵️</div>
+      <div class="proj-name">Hermes Agent 诊断</div>
+      <div class="proj-desc">多模型 Agent 401 故障根因定位——Token Plan key 的权限陷阱。</div>
+      <div class="proj-tags"><span>Python</span><span>Debug</span><span>Multi-Model</span></div>
+    </div>
+    <div class="proj-card" data-proj="site">
+      <div class="proj-icon">🏝️</div>
+      <div class="proj-name">这个网站</div>
+      <div class="proj-desc">HTML + CSS + JS 纯手工，内置几个小彩蛋，持续生长。你现在就在体验它。</div>
+      <div class="proj-tags"><span>HTML</span><span>CSS</span><span>JS</span></div>
+    </div>
   </div>
-  <div class="social-grid">
-    <a class="social-link" href="https://github.com/jackie" target="_blank" rel="noopener">
-      <span class="s-icon">🐙</span>
-      <div><div class="s-name">GitHub</div><div class="s-label">代码与项目</div></div>
+</section>
+
+<!-- Links -->
+<section id="links">
+  <p class="sec-label">Find Me</p>
+  <h2 class="sec-title">找到我</h2>
+  <div class="social-list">
+    <a class="social-item" href="https://github.com/No1Hoo" target="_blank" rel="noopener">
+      <span class="si-icon">🐙</span> GitHub
     </a>
-    <a class="social-link" href="mailto:zijie@zijiewu.com" id="emailLink">
-      <span class="s-icon">✉️</span>
-      <div><div class="s-name">Email</div><div class="s-label">say hello</div></div>
+    <a class="social-item" href="mailto:zijie@zijiewu.eu.cc" id="emailLink">
+      <span class="si-icon">✉️</span> Email
     </a>
-    <a class="social-link" href="#" id="wechatLink">
-      <span class="s-icon">💬</span>
-      <div><div class="s-name">微信公众号</div><div class="s-label">不定期更新</div></div>
+    <a class="social-item" href="#" id="wechatLink">
+      <span class="si-icon">💬</span> 公众号
+    </a>
+    <a class="social-item" href="https://github.com/No1Hoo/No1Hoo.github.io" target="_blank" rel="noopener">
+      <span class="si-icon">⌨️</span> 本站源码
     </a>
   </div>
 </section>
 
 <!-- Footer -->
 <footer>
-  <p>© 2026 Zijie Wu · Built with ❤️ and vanilla HTML</p>
+  <div>
+    <p class="ft-label">导航</p>
+    <a class="ft-link" href="#about">About</a>
+    <a class="ft-link" href="#journey">Journey</a>
+    <a class="ft-link" href="#works">Works</a>
+    <a class="ft-link" href="#links">Links</a>
+  </div>
+  <div>
+    <p class="ft-label">联系方式</p>
+    <a class="ft-link" href="mailto:zijie@zijiewu.eu.cc">zijie@zijiewu.eu.cc</a>
+    <p class="ft-link">中国 · 深圳</p>
+  </div>
+  <div>
+    <p class="ft-label">更新</p>
+    <p class="ft-link">2026-05-11</p>
+    <p class="ft-aphorism">"拥抱流动与偶然——存在的美恰在于不确定。"</p>
+  </div>
 </footer>
 
 <!-- Easter Egg Modal -->
 <div class="egg-modal" id="eggModal">
   <div class="egg-content">
-    <h3 id="eggEmoji">🎉</h3>
+    <h3 id="eggEmoji">🥚</h3>
     <p id="eggMsg">你发现了一个彩蛋！</p>
-    <button onclick="closeEgg()">关闭</button>
+    <button onclick="closeEgg()">好的</button>
   </div>
 </div>
 
-<!-- Click Counter Badge -->
-<div class="click-badge" id="clickBadge" title="点我试试">0</div>
+<!-- Secret Spot -->
+<div class="secret-spot" id="secretSpot" title="?"></div>
 
 <!-- Toast -->
 <div class="toast" id="toast"></div>
 
 <script>
-// ========== PARTICLES ==========
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
-let particles = [];
-let w, h;
-
-function resize() {
-  w = canvas.width = window.innerWidth;
-  h = canvas.height = window.innerHeight;
-}
-resize();
-window.addEventListener('resize', () => { resize(); initParticles(); });
-
-function initParticles() {
-  const count = Math.min(Math.floor((w * h) / 12000), 80);
-  particles = [];
-  for (let i = 0; i < count; i++) {
-    particles.push({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      r: Math.random() * 1.5 + 0.5,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: (Math.random() - 0.5) * 0.3,
-      alpha: Math.random() * 0.3 + 0.1,
-    });
-  }
-}
-
-function drawParticles() {
-  ctx.clearRect(0, 0, w, h);
-  particles.forEach(p => {
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(180,180,210,${p.alpha})`;
-    ctx.fill();
+// ===== SCROLL FADE IN =====
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.style.opacity='1';
+      e.target.style.transform='translateY(0)';
+    }
   });
-}
+},{threshold:0.12});
 
-function updateParticles() {
-  particles.forEach(p => {
-    p.x += p.vx;
-    p.y += p.vy;
-    if (p.x < 0 || p.x > w) p.vx *= -1;
-    if (p.y < 0 || p.y > h) p.vy *= -1;
-  });
-}
+document.querySelectorAll('section,.values,.timeline,.projects-grid,.social-list').forEach(el=>{
+  el.style.opacity='0';
+  el.style.transform='translateY(24px)';
+  el.style.transition='opacity .6s ease, transform .6s ease';
+  observer.observe(el);
+});
+document.querySelector('.hero').style.opacity='1';
+document.querySelector('.hero').style.transform='none';
 
-function animateParticles() {
-  drawParticles();
-  updateParticles();
-  requestAnimationFrame(animateParticles);
-}
-
-initParticles();
-animateParticles();
-
-// ========== SCROLL HINT HIDE ==========
-window.addEventListener('scroll', () => {
-  const hint = document.getElementById('scrollHint');
-  if (hint && window.scrollY > 100) hint.style.opacity = '0';
-  else if (hint) hint.style.opacity = '1';
+// ===== NAV SHADOW ON SCROLL =====
+window.addEventListener('scroll',()=>{
+  const nav=document.querySelector('nav');
+  if(window.scrollY>20) nav.style.boxShadow='0 1px 0 rgba(0,0,0,0.04)';
+  else nav.style.boxShadow='none';
 });
 
-// ========== PROJECT CARD CLICK ==========
-document.querySelectorAll('.project-card').forEach(card => {
-  card.addEventListener('click', function() {
-    const project = this.dataset.project;
-    const msgs = {
-      'cc-switch': '这个项目让 Claude 可以在多家模型供应商之间无缝切换 🔄',
-      'mechanical-cad': '从 Blender 到 build123d，参数化建模终于走上了正轨 ⚙️',
-      'hermes': '401 错误的根因竟然是 Token Plan key 的权限问题 🕵️',
-      'personal-site': '就是这个网站啦！你正在体验它 ✨',
+// ===== PROJECT CARD CLICK =====
+document.querySelectorAll('.proj-card').forEach(card=>{
+  card.addEventListener('click',function(){
+    const msgs={
+      'cc-switch':'为了让 Claude 在不同模型供应商之间无缝切换而造的小工具，用 Go + SQLite 实现 🔄',
+      'mech-cad':'从 Blender 苦苦挣扎 9 轮迭代，到 build123d 一把成功。教训：选对工具比努力更重要 ⚙️',
+      'hermes':'401 报错排查了整整一天，发现是 Token Plan key 的权限问题。debug 的魅力就在于此 🕵️',
+      'site':'就是你现在看到的这个网站啦。灵感来自粉蓝偶记，纯手工 HTML，零框架 ✨'
     };
-    showEgg('💡', msgs[project] || '项目详情即将上线');
+    showEgg('💡',msgs[this.dataset.proj]||'项目详情即将上线');
   });
 });
 
-// ========== CLICK COUNTER / BADGE ==========
-let clickCount = 0;
-const badge = document.getElementById('clickBadge');
-const clickMilestones = {
-  5: '你好像很喜欢点东西... 👀',
-  10: '停不下来了吗？😄',
-  20: '好吧，这是个小彩蛋——你很有耐心！🥚',
-  42: '42 —— 生命、宇宙以及一切的答案 🌌',
-  100: '一百次了！你是真正的探索者 🏆',
-};
-
-badge.addEventListener('click', (e) => {
-  e.stopPropagation();
-  clickCount++;
-  badge.textContent = clickCount;
-  if (clickMilestones[clickCount]) {
-    showToast(clickMilestones[clickCount]);
-  }
-  if (clickCount >= 100) {
-    badge.style.borderColor = '#ffd700';
-    badge.style.color = '#ffd700';
-  }
-});
-
-// ========== KONAMI CODE ==========
-const konami = [38,38,40,40,37,39,37,39,66,65];
-let konamiPos = 0;
-document.addEventListener('keydown', (e) => {
-  if (e.keyCode === konami[konamiPos]) {
+// ===== KONAMI CODE =====
+const konami=[38,38,40,40,37,39,37,39,66,65];
+let konamiPos=0;
+document.addEventListener('keydown',e=>{
+  if(e.keyCode===konami[konamiPos]){
     konamiPos++;
-    if (konamiPos === konami.length) {
-      showEgg('🎮', 'KONAMI CODE!!! 恭喜你发现了隐藏彩蛋——你是真正的玩家 🕹️');
-      konamiPos = 0;
-      // Special effect: invert colors briefly
-      document.body.style.filter = 'invert(1)';
-      setTimeout(() => { document.body.style.filter = ''; }, 800);
+    if(konamiPos===konami.length){
+      showEgg('🎮','KONAMI CODE!!! 看到这个说明你是那种乱按键盘的人——我很欣赏 🕹️');
+      konamiPos=0;
+      document.body.style.filter='hue-rotate(180deg)';
+      setTimeout(()=>{document.body.style.filter=''},600);
     }
-  } else {
-    konamiPos = 0;
-  }
+  }else{konamiPos=0}
 });
 
-// ========== DOUBLE CLICK LOGO ==========
-let logoClicks = 0;
-document.querySelector('.logo').addEventListener('click', (e) => {
+// ===== SECRET SPOT =====
+let spotClicks=0;
+const spotMsgs={3:'嘿，你发现了右下角的小秘密 👀',7:'还点呢？好吧这个角落确实挺诱人的 😄',15:'十五次！你是真正的探索者。好了，这个地方的秘密已经被你挖完了 🏆'};
+document.getElementById('secretSpot').addEventListener('click',e=>{
   e.stopPropagation();
-  logoClicks++;
-  if (logoClicks >= 5) {
-    showEgg('🔮', 'Logo 被你点了 ' + logoClicks + ' 次...好啦，这是个隐藏彩蛋！');
-    document.querySelector('.logo').style.color = '#ffd700';
+  spotClicks++;
+  if(spotMsgs[spotClicks]) showToast(spotMsgs[spotClicks]);
+  if(spotClicks>=15){
+    const spot=document.getElementById('secretSpot');
+    spot.style.background='rgba(200,180,150,0.15)';
   }
 });
 
-// ========== HIDDEN CORNER CLICK ==========
-let cornerClicks = [0,0,0,0];
-document.body.addEventListener('click', (e) => {
-  const margin = 40;
-  const corner =
-    e.clientX < margin && e.clientY < margin ? 0 :
-    e.clientX > w - margin && e.clientY < margin ? 1 :
-    e.clientX < margin && e.clientY > h - margin ? 2 :
-    e.clientX > w - margin && e.clientY > h - margin ? 3 : -1;
-
-  if (corner >= 0) {
-    cornerClicks[corner]++;
-    if (cornerClicks.every(c => c >= 3)) {
-      showEgg('🗺️', '四角都被你摸遍了！你是真正的探险家！');
-      cornerClicks = [0,0,0,0];
-    }
-  }
+// ===== FOUR CORNERS =====
+let corners=[0,0,0,0];
+document.body.addEventListener('click',e=>{
+  const m=36,w=window.innerWidth,h=window.innerHeight;
+  const c=e.clientX<m&&e.clientY<m?0:e.clientX>w-m&&e.clientY<m?1:e.clientX<m&&e.clientY>h-m?2:e.clientX>w-m&&e.clientY>h-m?3:-1;
+  if(c>=0){corners[c]++;if(corners.every(x=>x>=2)){showEgg('🗺️','四角都被你摸过了！欢迎你，探险家。');corners=[0,0,0,0]}}
 });
 
-// ========== MODAL & TOAST HELPERS ==========
-function showEgg(emoji, msg) {
-  document.getElementById('eggEmoji').textContent = emoji;
-  document.getElementById('eggMsg').textContent = msg;
+// ===== MODAL & TOAST =====
+function showEgg(emoji,msg){
+  document.getElementById('eggEmoji').textContent=emoji;
+  document.getElementById('eggMsg').textContent=msg;
   document.getElementById('eggModal').classList.add('show');
 }
+function closeEgg(){document.getElementById('eggModal').classList.remove('show')}
+document.getElementById('eggModal').addEventListener('click',function(e){if(e.target===this)closeEgg()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeEgg()});
 
-function closeEgg() {
-  document.getElementById('eggModal').classList.remove('show');
-}
-document.getElementById('eggModal').addEventListener('click', function(e) {
-  if (e.target === this) closeEgg();
-});
-
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  clearTimeout(t._timeout);
-  t._timeout = setTimeout(() => t.classList.remove('show'), 2500);
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(t._tid);
+  t._tid=setTimeout(()=>t.classList.remove('show'),2800);
 }
 
-// ========== SECTION REVEAL ON SCROLL ==========
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.opacity = '1';
-      entry.target.style.transform = 'translateY(0)';
-    }
-  });
-}, { threshold: 0.15 });
-
-document.querySelectorAll('section').forEach(s => {
-  s.style.opacity = '0';
-  s.style.transform = 'translateY(30px)';
-  s.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-  observer.observe(s);
-});
-
-// Make hero visible immediately
-document.querySelector('.hero').style.opacity = '1';
-document.querySelector('.hero').style.transform = 'none';
-
-console.log('%c 🏝️ 欢迎登岛！ %c 试试方向键 ↑↑↓↓←→←→BA ',
-  'background:#1a1a2e;color:#ffd700;padding:8px 16px;border-radius:4px;font-size:16px;',
-  'color:#8a8a9a;');
-console.log('%c 或者找找页面四个角... %c', 'color:#6a6a7a;', '');
+console.log('%c🏝️ 嗨，你打开了控制台。%c 试试 ↑↑↓↓←→←→BA ，或者点点右下角？',
+  'font-size:16px;color:#555;','color:#aaa;');
 </script>
 </body>
 </html>
