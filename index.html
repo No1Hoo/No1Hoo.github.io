@@ -42,18 +42,14 @@
   .hero-text h1{font-size:clamp(44px,6vw,80px);font-weight:700;line-height:1.15;color:#222228;margin-bottom:20px}
   .hero-text .tagline{font-size:17px;color:#7a7a82;max-width:360px;line-height:1.7}
   .hero-visual{
-    display:flex;justify-content:center;align-items:center;
+    display:flex;flex-direction:column;gap:24px;justify-content:center;align-items:center;
   }
-  .hero-blob{
-    width:280px;height:280px;border-radius:50%;
-    background:linear-gradient(135deg,#d4d0e8 0%,#e8d5c8 30%,#c8dae8 60%,#e2d8c8 100%);
-    filter:blur(40px);opacity:.7;
-    animation:float 8s ease-in-out infinite;
+  .hero-photo{
+    width:220px;height:280px;object-fit:cover;border-radius:12px;
+    border:3px solid #f0ebe0;box-shadow:0 12px 40px rgba(0,0,0,0.08);
+    filter:contrast(1.02) brightness(0.98);
   }
-  @keyframes float{
-    0%,100%{transform:translateY(0) scale(1)}
-    50%{transform:translateY(-20px) scale(1.05)}
-  }
+  .hero-photo-caption{font-size:12px;color:#c0b8a8;letter-spacing:1px;text-align:center}
 
   /* ===== SECTION HEADERS ===== */
   .sec-label{font-size:12px;color:#b0b0b8;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
@@ -190,7 +186,8 @@
       <p class="tagline">构建工具，也构建生活。<br>在互联网公海上拥有一座私人小岛。</p>
     </div>
     <div class="hero-visual">
-      <div class="hero-blob"></div>
+      <img class="hero-photo" src="resume-photo.png" alt="吴子杰" />
+      <p class="hero-photo-caption">Zijie Wu · 吴子杰</p>
     </div>
   </div>
 </section>
