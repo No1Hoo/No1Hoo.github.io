@@ -2,32 +2,184 @@ import './styles/global.css';
 import * as THREE from 'three';
 import { gsap } from 'gsap';
 
-const projects = [
-  {
-    title: '智渔观察',
-    copy: '基于 Next.js、React、TypeScript、Prisma、SQLite 搭建水产产业情报网站 MVP，支持信息聚合、管理后台、RSS / 网页采集、AI 摘要与定时采集。',
-    tags: ['Next.js', 'React', 'TypeScript', 'Prisma', 'SQLite'],
-    link: 'https://github.com/No1Hoo/zhiyu-observatory',
-    action: 'Open Repository ↗',
-    color: '#d9ff57',
+const fallbackContent = {
+  meta: {
+    title: '吴子杰 Zijie Wu — AI Aquaculture Systems',
+    description: '吴子杰 Zijie Wu：海南大学水产硕士，AI 赋能研发工程师，水产产业数字化与 AI 工作流实践者。',
   },
-  {
-    title: 'Chinese Patent Drafting Skill',
-    copy: '面向 Codex 的中文发明专利撰写 Skill，用于专利草稿起草、现有技术对比、权利要求策略分析、附图生成与提交前 QA。',
-    tags: ['Codex Skill', 'Patent Drafting', 'Prompt Engineering', 'QA'],
-    link: '',
-    action: '',
-    color: '#8ef9ff',
+  brand: { mark: 'ZW', name: 'Zijie Wu / WUZIJIE' },
+  hero: {
+    eyebrow: 'AI × Aquaculture × Product',
+    name: '吴子杰',
+    latinName: 'Zijie Wu',
+    lede: '海南大学（211 / 双一流）水产硕士，具备科研研发、项目管理、技术文档写作与 AI 工作流实践复合背景。擅长把 AI 工具融入技术调研、方案设计、专利材料、研发文档和自动化工作流。',
+    primaryAction: { label: '查看完整简历 ↗', href: '/resume/wuzijie-resume.pdf' },
+    secondaryAction: { label: '联系我', href: '#contact' },
+    profileImage: { src: '/assets/zijie-wu-headshot.webp', alt: '吴子杰证件照' },
+    profileMeta: ['广东湛江', '目标地区：海南省 / 大湾区城市', 'AI R&D Workflow Builder'],
   },
-  {
-    title: 'No1Hoo.github.io',
-    copy: '原生 HTML / CSS / JS 个人主页与作品集网站，线上地址 zijiewu.eu.cc，集中展示个人介绍、项目作品、科研经历与 AI 实践。',
-    tags: ['Three.js', 'GSAP', 'Vite', 'GitHub Pages', 'WebGL'],
-    link: 'https://github.com/No1Hoo/No1Hoo.github.io',
-    action: 'View Source ↗',
-    color: '#ffc86b',
+  work: { eyebrow: 'Selected work', title: '把行业判断变成可以演示、可以迭代的项目。' },
+  projects: [
+    {
+      title: '智渔观察',
+      copy: '基于 Next.js、React、TypeScript、Prisma、SQLite 搭建水产产业情报网站 MVP，支持信息聚合、管理后台、RSS / 网页采集、AI 摘要与定时采集。',
+      tags: ['Next.js', 'React', 'TypeScript', 'Prisma', 'SQLite'],
+      link: 'https://github.com/No1Hoo/zhiyu-observatory',
+      action: 'Open Repository ↗',
+      color: '#d9ff57',
+    },
+    {
+      title: 'Chinese Patent Drafting Skill',
+      copy: '面向 Codex 的中文发明专利撰写 Skill，用于专利草稿起草、现有技术对比、权利要求策略分析、附图生成与提交前 QA。',
+      tags: ['Codex Skill', 'Patent Drafting', 'Prompt Engineering', 'QA'],
+      link: '',
+      action: '',
+      color: '#8ef9ff',
+    },
+    {
+      title: 'No1Hoo.github.io',
+      copy: '原生 HTML / CSS / JS 个人主页与作品集网站，线上地址 zijiewu.eu.cc，集中展示个人介绍、项目作品、科研经历与 AI 实践。',
+      tags: ['Three.js', 'GSAP', 'Vite', 'GitHub Pages', 'WebGL'],
+      link: 'https://github.com/No1Hoo/No1Hoo.github.io',
+      action: 'View Source ↗',
+      color: '#ffc86b',
+    },
+  ],
+};
+
+async function loadSiteContent() {
+  try {
+    const response = await fetch(`/content/site.json?v=${Date.now()}`, { cache: 'no-store' });
+    if (!response.ok) throw new Error(`Content request failed: ${response.status}`);
+    return { ...fallbackContent, ...await response.json() };
+  } catch (error) {
+    console.warn('Using fallback portfolio content.', error);
+    return fallbackContent;
   }
-];
+}
+
+function setText(selector, value) {
+  const element = document.querySelector(selector);
+  if (element && value !== undefined) element.textContent = value;
+}
+
+function setLink(selector, link) {
+  const element = document.querySelector(selector);
+  if (!element || !link) return;
+  element.textContent = link.label || '';
+  element.href = link.href || '#';
+}
+
+function renderLinkList(containerSelector, links = []) {
+  const container = document.querySelector(containerSelector);
+  if (!container) return;
+  container.replaceChildren(...links.map((link) => {
+    const anchor = document.createElement('a');
+    anchor.className = 'contact-link';
+    anchor.href = link.href || '#';
+    anchor.textContent = link.label || link.href || '';
+    if (/^https?:\/\//.test(anchor.href) || link.href?.endsWith('.pdf')) {
+      anchor.target = '_blank';
+      anchor.rel = 'noopener';
+    }
+    return anchor;
+  }));
+}
+
+function renderArticleList(containerSelector, items = [], variant = 'plain') {
+  const container = document.querySelector(containerSelector);
+  if (!container) return;
+  container.replaceChildren(...items.map((item) => {
+    const article = document.createElement('article');
+    if (variant === 'timeline') {
+      const time = document.createElement('time');
+      time.textContent = item.time || '';
+      const title = document.createElement('h3');
+      title.textContent = item.title || '';
+      const copy = document.createElement('p');
+      copy.textContent = item.copy || '';
+      article.append(time, title, copy);
+      return article;
+    }
+    const title = document.createElement('span');
+    title.textContent = item.title || '';
+    const copy = document.createElement('p');
+    copy.textContent = item.copy || '';
+    article.append(title, copy);
+    return article;
+  }));
+}
+
+function renderSiteContent(content) {
+  document.title = content.meta?.title || fallbackContent.meta.title;
+  const description = document.querySelector('meta[name="description"]');
+  if (description) description.content = content.meta?.description || fallbackContent.meta.description;
+
+  setText('.brand span', content.brand?.mark);
+  setText('.brand strong', content.brand?.name);
+  setText('.hero .eyebrow', content.hero?.eyebrow);
+  const heroTitle = document.querySelector('#hero-title');
+  if (heroTitle) {
+    heroTitle.replaceChildren(document.createTextNode(content.hero?.name || ''), document.createElement('span'));
+    heroTitle.querySelector('span').textContent = content.hero?.latinName || '';
+  }
+  setText('.lede', content.hero?.lede);
+  setLink('.hero-actions a:first-child', content.hero?.primaryAction);
+  setLink('.hero-actions a:last-child', content.hero?.secondaryAction);
+  const profileImage = document.querySelector('.profile-card img');
+  if (profileImage && content.hero?.profileImage) {
+    profileImage.src = content.hero.profileImage.src;
+    profileImage.alt = content.hero.profileImage.alt || '';
+  }
+  const profileMeta = document.querySelector('.profile-meta');
+  if (profileMeta) {
+    profileMeta.replaceChildren(...(content.hero?.profileMeta || []).map((text) => {
+      const span = document.createElement('span');
+      span.textContent = text;
+      return span;
+    }));
+  }
+
+  setText('#work .eyebrow', content.work?.eyebrow);
+  setText('#work-title', content.work?.title);
+  setText('#system .eyebrow', content.system?.eyebrow);
+  setText('#system-title', content.system?.title);
+  renderArticleList('.system-grid', content.system?.items);
+
+  const metrics = document.querySelector('.metrics');
+  if (metrics) {
+    metrics.replaceChildren(...(content.metrics || []).map((item) => {
+      const article = document.createElement('article');
+      const strong = document.createElement('strong');
+      strong.textContent = item.value || '';
+      const span = document.createElement('span');
+      span.textContent = item.label || '';
+      article.append(strong, span);
+      return article;
+    }));
+  }
+
+  setText('#resume .eyebrow', content.resume?.eyebrow);
+  setText('#resume-title', content.resume?.title);
+  renderArticleList('.resume-cards', content.resume?.items);
+  setText('#journey .eyebrow', content.journey?.eyebrow);
+  setText('#journey-title', content.journey?.title);
+  renderArticleList('.timeline', content.journey?.items, 'timeline');
+  setText('.research .eyebrow', content.research?.eyebrow);
+  setText('#research-title', content.research?.title);
+  renderArticleList('.research-list', content.research?.items);
+  setText('#contact .eyebrow', content.contact?.eyebrow);
+  setText('#contact-title', content.contact?.title);
+  renderLinkList('.contact-row', content.contact?.links);
+  const footerSpans = document.querySelectorAll('footer span');
+  if (footerSpans[0]) footerSpans[0].textContent = content.footer?.left || '';
+  if (footerSpans[1]) footerSpans[1].textContent = content.footer?.right || '';
+}
+
+async function init() {
+const siteContent = await loadSiteContent();
+renderSiteContent(siteContent);
+const projects = siteContent.projects?.length ? siteContent.projects : fallbackContent.projects;
 
 const canvas = document.querySelector('#stage');
 const renderer = new THREE.WebGLRenderer({
@@ -264,3 +416,8 @@ function animate() {
 
 renderProject();
 animate();
+}
+
+init().catch((error) => {
+  console.error('Portfolio initialization failed.', error);
+});

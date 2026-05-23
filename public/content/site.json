@@ -1,0 +1,195 @@
+{
+  "meta": {
+    "title": "吴子杰 Zijie Wu — AI Aquaculture Systems",
+    "description": "吴子杰 Zijie Wu：海南大学水产硕士，AI 赋能研发工程师，水产产业数字化与 AI 工作流实践者。"
+  },
+  "brand": {
+    "mark": "ZW",
+    "name": "Zijie Wu / WUZIJIE"
+  },
+  "hero": {
+    "eyebrow": "AI × Aquaculture × Product",
+    "name": "吴子杰",
+    "latinName": "Zijie Wu",
+    "lede": "海南大学（211 / 双一流）水产硕士，具备科研研发、项目管理、技术文档写作与 AI 工作流实践复合背景。擅长把 AI 工具融入技术调研、方案设计、专利材料、研发文档和自动化工作流。",
+    "primaryAction": {
+      "label": "查看完整简历 ↗",
+      "href": "/resume/wuzijie-resume.pdf"
+    },
+    "secondaryAction": {
+      "label": "联系我",
+      "href": "#contact"
+    },
+    "profileImage": {
+      "src": "/assets/zijie-wu-headshot.webp",
+      "alt": "吴子杰证件照"
+    },
+    "profileMeta": [
+      "广东湛江",
+      "目标地区：海南省 / 大湾区城市",
+      "AI R&D Workflow Builder"
+    ]
+  },
+  "work": {
+    "eyebrow": "Selected work",
+    "title": "把行业判断变成可以演示、可以迭代的项目。"
+  },
+  "projects": [
+    {
+      "title": "智渔观察",
+      "copy": "基于 Next.js、React、TypeScript、Prisma、SQLite 搭建水产产业情报网站 MVP，支持信息聚合、管理后台、RSS / 网页采集、AI 摘要与定时采集。",
+      "tags": ["Next.js", "React", "TypeScript", "Prisma", "SQLite"],
+      "link": "https://github.com/No1Hoo/zhiyu-observatory",
+      "action": "Open Repository ↗",
+      "color": "#d9ff57"
+    },
+    {
+      "title": "Chinese Patent Drafting Skill",
+      "copy": "面向 Codex 的中文发明专利撰写 Skill，用于专利草稿起草、现有技术对比、权利要求策略分析、附图生成与提交前 QA。",
+      "tags": ["Codex Skill", "Patent Drafting", "Prompt Engineering", "QA"],
+      "link": "",
+      "action": "",
+      "color": "#8ef9ff"
+    },
+    {
+      "title": "No1Hoo.github.io",
+      "copy": "原生 HTML / CSS / JS 个人主页与作品集网站，线上地址 zijiewu.eu.cc，集中展示个人介绍、项目作品、科研经历与 AI 实践。",
+      "tags": ["Three.js", "GSAP", "Vite", "GitHub Pages", "WebGL"],
+      "link": "https://github.com/No1Hoo/No1Hoo.github.io",
+      "action": "View Source ↗",
+      "color": "#ffc86b"
+    }
+  ],
+  "system": {
+    "eyebrow": "Personal operating system",
+    "title": "不是包装成传统全栈，而是建立更稀缺的系统。",
+    "items": [
+      {
+        "title": "01 / AI 工具与工作流实践",
+        "copy": "熟练使用 Claude Code、Codex、Cursor、Trae、OpenCode 等 AI 工具，辅助技术调研、代码理解、项目搭建与自动化工作流实践。"
+      },
+      {
+        "title": "02 / 科研项目与研发验证",
+        "copy": "具备深远海养殖、水产营养、生物实验和养殖技术验证经验，熟悉实验设计、数据整理与科研结果分析。"
+      },
+      {
+        "title": "03 / 文档写作与成果转化",
+        "copy": "具备发明专利、技术交底书、科研论文、标准规程、测试报告和可行性分析报告撰写经验。"
+      }
+    ]
+  },
+  "metrics": [
+    {
+      "value": "3",
+      "label": "发明专利"
+    },
+    {
+      "value": "9",
+      "label": "学术论文"
+    },
+    {
+      "value": "4",
+      "label": "SCI 论文"
+    },
+    {
+      "value": "3+",
+      "label": "AI 实践项目"
+    }
+  ],
+  "resume": {
+    "eyebrow": "Resume highlights",
+    "title": "简历里的硬信息，转成更容易浏览的能力证据。",
+    "items": [
+      {
+        "title": "AI Agent / Vibe Coding / Prompt Engineering",
+        "copy": "可快速完成需求拆解、方案推演、原型验证与内容生成，熟悉 VEO、SeedDance、Image 等 AI 视觉 / 视频工具。"
+      },
+      {
+        "title": "水产养殖 + 工程材料 + AI 工具链",
+        "copy": "能在传统研发场景中引入 AI 提效与创新验证方法，把行业知识转化为可执行的技术路线和项目材料。"
+      },
+      {
+        "title": "SolidWorks / GraphPad / SPSS / Office",
+        "copy": "具备研发辅助设计、数据处理、英文技术文档检索、GitHub 项目阅读和跨部门协同推进能力。"
+      }
+    ]
+  },
+  "journey": {
+    "eyebrow": "Journey",
+    "title": "从水产科研到产业研发，再到 AI 工具链实践。",
+    "items": [
+      {
+        "time": "2025.02 — 至今",
+        "title": "南方海洋科学与工程广东省实验室（湛江） · 科研研发岗",
+        "copy": "参与“湛江湾1号”“恒燚1号”等深远海养殖平台陆基配套科研，完成关键参数验证、实验优化、数据整理与结果分析，支撑技术方案形成与持续优化。"
+      },
+      {
+        "time": "2024.07 — 2025.01",
+        "title": "中财集团 · 渔业研发工程师",
+        "copy": "参与深海养殖管材产品研发，负责市场需求调研、竞品分析、应用场景梳理和产品可行性研究，使用 SolidWorks 完成研发辅助设计。"
+      },
+      {
+        "time": "2021.09 — 2024.06",
+        "title": "海南大学 · 水产硕士",
+        "copy": "动物营养与饲料方向。211 / 双一流高校背景，形成科研实验、论文写作、数据理解与产业技术方案表达能力。"
+      },
+      {
+        "time": "2017.09 — 2021.06",
+        "title": "广东海洋大学 · 水生动物医学",
+        "copy": "本科阶段建立水生动物医学、生物学与养殖基础，为后续科研与产业研发打下专业底座。"
+      }
+    ]
+  },
+  "research": {
+    "eyebrow": "Research output",
+    "title": "科研成果不只是数量，也是技术材料转化能力。",
+    "items": [
+      {
+        "title": "发明专利",
+        "copy": "《水下图像增强方法、设备、存储介质及程序产品》（申请号：202610522524X）"
+      },
+      {
+        "title": "发明专利",
+        "copy": "《水产养殖系统及其控制方法》（申请号：202511155414.6）"
+      },
+      {
+        "title": "发明专利",
+        "copy": "《一种褐藻多酚的制备方法及应用》（公开号：CN117562175A）"
+      },
+      {
+        "title": "学术论文",
+        "copy": "发表学术论文 9 篇，其中 SCI 论文 4 篇，中文论文 5 篇。"
+      }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Let's build useful tools for real industries.",
+    "links": [
+      {
+        "label": "15219743914",
+        "href": "tel:+8615219743914"
+      },
+      {
+        "label": "2628853313@qq.com",
+        "href": "mailto:2628853313@qq.com"
+      },
+      {
+        "label": "GitHub / No1Hoo",
+        "href": "https://github.com/No1Hoo"
+      },
+      {
+        "label": "智渔观察",
+        "href": "https://github.com/No1Hoo/zhiyu-observatory"
+      },
+      {
+        "label": "下载 PDF 简历",
+        "href": "/resume/wuzijie-resume.pdf"
+      }
+    ]
+  },
+  "footer": {
+    "left": "© 2026 Zijie Wu · Interactive portfolio",
+    "right": "AI × Aquaculture × Product"
+  }
+}
