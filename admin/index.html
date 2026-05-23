@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio Admin · Zijie Wu</title>
+    <link rel="stylesheet" href="/admin/admin.css" />
+  </head>
+  <body>
+    <main class="admin-shell">
+      <header class="admin-header">
+        <div>
+          <p>GitHub CMS</p>
+          <h1>个人网站内容后台</h1>
+        </div>
+        <nav>
+          <a href="/" target="_blank" rel="noopener">打开网站 ↗</a>
+          <button id="logout" type="button">清除 Token</button>
+        </nav>
+      </header>
+
+      <section class="panel auth-panel">
+        <div>
+          <h2>连接 GitHub</h2>
+          <p>
+            Token 只保存在当前浏览器的 <code>localStorage</code>，不会写入仓库。
+            需要能读写 <code>No1Hoo/No1Hoo.github.io</code> 的 Contents 权限。
+          </p>
+        </div>
+        <label>
+          GitHub Token
+          <input id="token" type="password" autocomplete="off" placeholder="github_pat_... 或 ghp_..." />
+        </label>
+        <div class="actions">
+          <button id="load-live" type="button">读取线上内容</button>
+          <button id="save-token" type="button">保存 Token</button>
+        </div>
+      </section>
+
+      <section class="panel status-panel" aria-live="polite">
+        <strong id="status">准备就绪。先读取线上内容，或直接编辑当前 JSON。</strong>
+      </section>
+
+      <section class="editor-layout">
+        <section class="panel">
+          <div class="section-head">
+            <div>
+              <h2>字段编辑</h2>
+              <p>适合快速修改文字、链接、标题、联系方式。改完会同步到右侧 JSON。</p>
+            </div>
+            <button id="apply-fields" type="button">应用字段修改</button>
+          </div>
+          <div id="field-editor" class="field-editor"></div>
+        </section>
+
+        <section class="panel">
+          <div class="section-head">
+            <div>
+              <h2>原始 JSON</h2>
+              <p>适合增删项目、调整数组顺序或批量修改。保存前会校验 JSON。</p>
+            </div>
+            <button id="format-json" type="button">格式化</button>
+          </div>
+          <textarea id="json-editor" spellcheck="false"></textarea>
+          <div class="actions end">
+            <button id="validate-json" type="button">校验 JSON</button>
+            <button id="save-github" class="primary" type="button">保存并发布</button>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script type="module" src="/admin/admin.js"></script>
+  </body>
+</html>
