@@ -4,40 +4,36 @@ import { gsap } from 'gsap';
 
 const projects = [
   {
-    title: 'Dream Portal',
-    copy: 'Spatial interface, audio-reactive particles, and a WebGL stage made for launch-day traffic.',
-    tags: ['XR', 'WebGL', 'Launch'],
+    title: '智渔观察',
+    copy: '水产产业情报网站 MVP，聚焦水产养殖技术、智能设备、AI 应用、饲料苗种、动保趋势和价格观察。',
+    tags: ['Next.js', 'React', 'Prisma', 'AI Coding', 'Aquaculture'],
+    link: 'https://github.com/No1Hoo/zhiyu-observatory',
+    action: 'Open Repository ↗',
+    color: '#d9ff57',
+  },
+  {
+    title: '个人品牌网站',
+    copy: '基于 GitHub Pages 的个人主页，用 Three.js、GSAP、语义化 HTML 和响应式 CSS 构建沉浸式作品集展示。',
+    tags: ['Three.js', 'GSAP', 'Vite', 'GitHub Pages', 'WebGL'],
+    link: 'https://github.com/No1Hoo/No1Hoo.github.io',
+    action: 'View Source ↗',
     color: '#8ef9ff',
   },
   {
-    title: 'Signal Garden',
-    copy: 'A living data garden where brand stories bloom into realtime geometry and responsive sound.',
-    tags: ['Data', 'Particles', 'Audio'],
-    color: '#f7ff6a',
-  },
-  {
-    title: 'Glass Engine',
-    copy: 'Interactive product theater with refractive surfaces, layered video, and precise scroll timing.',
-    tags: ['Product', 'Shader', 'Commerce'],
-    color: '#ff8fb8',
-  },
-  {
-    title: 'Night Index',
-    copy: 'An editorial archive that behaves like a cinematic instrument for browsing deep case studies.',
-    tags: ['Archive', 'Editorial', 'Motion'],
-    color: '#9dffb8',
-  },
-  {
-    title: 'Field Room',
-    copy: 'A virtual studio space where project cards orbit through a tactile volumetric lighting rig.',
-    tags: ['3D', 'Studio', 'Realtime'],
+    title: '深远海养殖方案',
+    copy: '围绕绿鳍马面鲀、红鳍笛鲷等深水网箱养殖场景，参与技术规程优化、养殖方案设计和项目申报。',
+    tags: ['Aquaculture', 'Protocol', 'Research', 'Technical Writing'],
+    link: '',
+    action: '',
     color: '#ffc86b',
   },
   {
-    title: 'Pulse Console',
-    copy: 'A control surface for music-driven visuals, designed with low-latency interactions and crisp UI.',
-    tags: ['Music', 'Tool', 'Canvas'],
-    color: '#a78bff',
+    title: '渔业管道研发',
+    copy: '参与深海养殖管材、小棚虾养殖管道系统、渔业增氧管等方向的市场调研、结构设计和试制协调。',
+    tags: ['R&D', 'SolidWorks', 'Product', 'Market Research'],
+    link: '',
+    action: '',
+    color: '#ff8fb8',
   },
 ];
 
@@ -189,10 +185,13 @@ const titleEl = document.querySelector('#project-title');
 const copyEl = document.querySelector('#project-copy');
 const indexEl = document.querySelector('#project-index');
 const tagsEl = document.querySelector('#project-tags');
+const linkEl = document.querySelector('#project-link');
+const countEl = document.querySelector('.project-count');
 
 function renderProject() {
   const project = projects[activeIndex];
   indexEl.textContent = String(activeIndex + 1).padStart(2, '0');
+  countEl.lastChild.textContent = ` / ${String(projects.length).padStart(2, '0')}`;
   titleEl.textContent = project.title;
   copyEl.textContent = project.copy;
   tagsEl.replaceChildren(...project.tags.map((tag) => {
@@ -200,6 +199,15 @@ function renderProject() {
     span.textContent = tag;
     return span;
   }));
+  if (project.link) {
+    linkEl.hidden = false;
+    linkEl.href = project.link;
+    linkEl.textContent = project.action;
+  } else {
+    linkEl.hidden = true;
+    linkEl.removeAttribute('href');
+    linkEl.textContent = '';
+  }
   document.documentElement.style.setProperty('--accent', project.color);
 
   panelUniforms.forEach((uniforms, index) => {

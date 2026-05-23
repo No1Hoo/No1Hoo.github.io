@@ -28,6 +28,7 @@ body {
     radial-gradient(circle at 50% 10%, rgba(255, 255, 255, 0.08), transparent 30%),
     linear-gradient(145deg, #030405 0%, #090c0d 45%, #030405 100%);
   color: var(--ink);
+  line-height: 1.55;
 }
 
 a {
@@ -100,6 +101,7 @@ a:focus-visible {
   border: 1px solid var(--line);
   color: var(--accent);
   font-size: 13px;
+  font-weight: 800;
 }
 
 .brand strong {
@@ -171,6 +173,12 @@ h1 {
   font-weight: 650;
 }
 
+h1 span {
+  display: block;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(243, 244, 236, 0.78);
+}
+
 .lede {
   max-width: 600px;
   color: var(--muted);
@@ -238,6 +246,20 @@ h3 {
   line-height: 1.55;
 }
 
+.project-link {
+  display: inline-flex;
+  margin-top: 30px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.project-link[hidden] {
+  display: none;
+}
+
 .tags {
   display: flex;
   flex-wrap: wrap;
@@ -275,6 +297,77 @@ h3 {
   line-height: 1.55;
 }
 
+.metrics {
+  min-height: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  padding-top: 0;
+  padding-bottom: clamp(72px, 8vw, 110px);
+}
+
+.metrics article {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.045);
+  padding: clamp(20px, 3vw, 34px);
+  backdrop-filter: blur(14px);
+}
+
+.metrics strong {
+  display: block;
+  color: var(--accent);
+  font-size: clamp(44px, 6vw, 86px);
+  line-height: 0.9;
+  font-weight: 650;
+}
+
+.metrics span {
+  display: block;
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.journey {
+  display: grid;
+  grid-template-columns: minmax(0, 0.54fr) minmax(340px, 0.7fr);
+  gap: clamp(28px, 6vw, 88px);
+}
+
+.timeline {
+  display: grid;
+  gap: 14px;
+}
+
+.timeline article {
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.04), transparent 80%);
+}
+
+.timeline time {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.timeline h3 {
+  margin-bottom: 10px;
+  font-size: clamp(22px, 2.4vw, 34px);
+  line-height: 1.08;
+}
+
+.timeline p {
+  color: var(--muted);
+}
+
 .contact {
   min-height: 72vh;
   display: flex;
@@ -283,11 +376,33 @@ h3 {
   max-width: 920px;
 }
 
+.contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 24px;
+}
+
 .contact-link {
   width: fit-content;
   border-bottom: 1px solid var(--accent);
   color: var(--accent);
-  font-size: clamp(22px, 3vw, 42px);
+  font-size: clamp(17px, 2.2vw, 30px);
+}
+
+footer {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  gap: 22px;
+  border-top: 1px solid var(--line);
+  padding: 26px clamp(18px, 4vw, 58px) 42px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .controls {
@@ -334,7 +449,8 @@ h3 {
 
   .hero,
   .work,
-  .system {
+  .system,
+  .journey {
     grid-template-columns: 1fr;
   }
 
@@ -350,12 +466,32 @@ h3 {
   .project-panel {
     min-height: auto;
   }
+
+  .metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 560px) {
+  section {
+    padding-inline: 18px;
+  }
+
   .site-header nav {
     font-size: 12px;
     gap: 10px;
+  }
+
+  .site-header nav a:nth-child(2) {
+    display: none;
+  }
+
+  .metrics {
+    grid-template-columns: 1fr;
+  }
+
+  footer {
+    flex-direction: column;
   }
 
   .controls button {
