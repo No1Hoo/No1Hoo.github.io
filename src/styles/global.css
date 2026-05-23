@@ -140,9 +140,9 @@ section {
 
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(220px, 0.35fr);
+  grid-template-columns: minmax(0, 0.9fr) minmax(280px, 0.42fr);
   align-items: end;
-  gap: 32px;
+  gap: clamp(28px, 5vw, 76px);
 }
 
 .hero-copy {
@@ -186,24 +186,67 @@ h1 span {
   line-height: 1.55;
 }
 
-.hero-meta {
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.hero-actions a {
+  border: 1px solid var(--line);
+  padding: 11px 14px;
+  background: rgba(255, 255, 255, 0.045);
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: border-color 220ms var(--ease), color 220ms var(--ease), transform 220ms var(--ease);
+}
+
+.hero-actions a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.profile-card {
   display: grid;
-  gap: 13px;
+  gap: 16px;
   justify-self: end;
-  width: min(280px, 100%);
+  width: min(360px, 100%);
   padding-bottom: 7vh;
+}
+
+.profile-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border: 1px solid color-mix(in srgb, var(--accent), transparent 44%);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.34);
+}
+
+.profile-meta {
+  display: grid;
+  gap: 11px;
   color: var(--quiet);
   font-size: 13px;
   text-transform: uppercase;
 }
 
-.hero-meta span {
+.profile-meta span {
   border-top: 1px solid var(--line);
   padding-top: 12px;
 }
 
 .work,
-.system {
+.system,
+.resume-grid,
+.research {
   display: grid;
   grid-template-columns: minmax(0, 0.75fr) minmax(320px, 0.42fr);
   align-items: center;
@@ -279,12 +322,16 @@ h3 {
   gap: 14px;
 }
 
-.system-grid article {
+.system-grid article,
+.resume-cards article,
+.research-list article {
   border-top: 1px solid var(--line);
   padding-top: 18px;
 }
 
-.system-grid span {
+.system-grid span,
+.resume-cards span,
+.research-list span {
   display: block;
   margin-bottom: 10px;
   color: var(--ink);
@@ -292,9 +339,17 @@ h3 {
   font-weight: 700;
 }
 
-.system-grid p {
+.system-grid p,
+.resume-cards p,
+.research-list p {
   color: var(--muted);
   line-height: 1.55;
+}
+
+.resume-cards,
+.research-list {
+  display: grid;
+  gap: 14px;
 }
 
 .metrics {
@@ -450,7 +505,9 @@ footer {
   .hero,
   .work,
   .system,
-  .journey {
+  .journey,
+  .resume-grid,
+  .research {
     grid-template-columns: 1fr;
   }
 
@@ -458,9 +515,10 @@ footer {
     align-items: center;
   }
 
-  .hero-meta {
+  .profile-card {
     justify-self: start;
     padding-bottom: 0;
+    width: min(320px, 100%);
   }
 
   .project-panel {
@@ -479,10 +537,14 @@ footer {
 
   .site-header nav {
     font-size: 12px;
-    gap: 10px;
+    gap: 12px;
   }
 
   .site-header nav a:nth-child(2) {
+    display: none;
+  }
+
+  .site-header nav a:nth-child(3) {
     display: none;
   }
 

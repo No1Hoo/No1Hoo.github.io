@@ -5,36 +5,28 @@ import { gsap } from 'gsap';
 const projects = [
   {
     title: '智渔观察',
-    copy: '水产产业情报网站 MVP，聚焦水产养殖技术、智能设备、AI 应用、饲料苗种、动保趋势和价格观察。',
-    tags: ['Next.js', 'React', 'Prisma', 'AI Coding', 'Aquaculture'],
+    copy: '基于 Next.js、React、TypeScript、Prisma、SQLite 搭建水产产业情报网站 MVP，支持信息聚合、管理后台、RSS / 网页采集、AI 摘要与定时采集。',
+    tags: ['Next.js', 'React', 'TypeScript', 'Prisma', 'SQLite'],
     link: 'https://github.com/No1Hoo/zhiyu-observatory',
     action: 'Open Repository ↗',
     color: '#d9ff57',
   },
   {
-    title: '个人品牌网站',
-    copy: '基于 GitHub Pages 的个人主页，用 Three.js、GSAP、语义化 HTML 和响应式 CSS 构建沉浸式作品集展示。',
-    tags: ['Three.js', 'GSAP', 'Vite', 'GitHub Pages', 'WebGL'],
-    link: 'https://github.com/No1Hoo/No1Hoo.github.io',
-    action: 'View Source ↗',
+    title: 'Chinese Patent Drafting Skill',
+    copy: '面向 Codex 的中文发明专利撰写 Skill，用于专利草稿起草、现有技术对比、权利要求策略分析、附图生成与提交前 QA。',
+    tags: ['Codex Skill', 'Patent Drafting', 'Prompt Engineering', 'QA'],
+    link: '',
+    action: '',
     color: '#8ef9ff',
   },
   {
-    title: '深远海养殖方案',
-    copy: '围绕绿鳍马面鲀、红鳍笛鲷等深水网箱养殖场景，参与技术规程优化、养殖方案设计和项目申报。',
-    tags: ['Aquaculture', 'Protocol', 'Research', 'Technical Writing'],
-    link: '',
-    action: '',
+    title: 'No1Hoo.github.io',
+    copy: '原生 HTML / CSS / JS 个人主页与作品集网站，线上地址 zijiewu.eu.cc，集中展示个人介绍、项目作品、科研经历与 AI 实践。',
+    tags: ['Three.js', 'GSAP', 'Vite', 'GitHub Pages', 'WebGL'],
+    link: 'https://github.com/No1Hoo/No1Hoo.github.io',
+    action: 'View Source ↗',
     color: '#ffc86b',
-  },
-  {
-    title: '渔业管道研发',
-    copy: '参与深海养殖管材、小棚虾养殖管道系统、渔业增氧管等方向的市场调研、结构设计和试制协调。',
-    tags: ['R&D', 'SolidWorks', 'Product', 'Market Research'],
-    link: '',
-    action: '',
-    color: '#ff8fb8',
-  },
+  }
 ];
 
 const canvas = document.querySelector('#stage');
