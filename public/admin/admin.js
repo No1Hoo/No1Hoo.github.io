@@ -1,6 +1,6 @@
 const owner = 'No1Hoo';
 const repo = 'No1Hoo.github.io';
-const contentUrl = '/content/site.json';
+const contentUrl = '../content/site.json';
 const sourceTargets = [
   { branch: 'main', path: 'public/content/site.json' },
   { branch: 'gh-pages', path: 'content/site.json' },
@@ -153,13 +153,11 @@ async function saveToGithub() {
     setStatus(`正在保存 ${target.branch}:${target.path}...`);
     await saveFile(target, jsonText);
   }
-  localStorage.setItem('portfolio-admin-token', getToken());
-  setStatus('保存完成。刷新网站即可看到新内容；GitHub Pages/CDN 可能有几十秒缓存。', 'ok');
+  setStatus('GitHub 内容保存完成。GitHub Pages 可能有缓存；腾讯云镜像需重新构建部署，预渲染文本也在下次部署更新。', 'ok');
 }
 
 document.querySelector('#save-token').addEventListener('click', () => {
-  localStorage.setItem('portfolio-admin-token', getToken());
-  setStatus('Token 已保存在当前浏览器。', 'ok');
+  setStatus('Token 仅留在当前页面内存，刷新或关闭页面即清除。', 'ok');
 });
 
 document.querySelector('#logout').addEventListener('click', () => {
@@ -205,5 +203,6 @@ document.querySelector('#save-github').addEventListener('click', () => {
   saveToGithub().catch((error) => setStatus(error.message, 'error'));
 });
 
-tokenInput.value = localStorage.getItem('portfolio-admin-token') || '';
+localStorage.removeItem('portfolio-admin-token');
+tokenInput.value = '';
 loadPublicContent().catch((error) => setStatus(error.message, 'error'));
