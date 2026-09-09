@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio Admin · Zijie Wu</title>
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="/admin/admin.css" />
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./admin.css" />
   </head>
   <body>
     <main class="admin-shell">
@@ -15,7 +15,7 @@
           <h1>个人网站内容后台</h1>
         </div>
         <nav>
-          <a href="/" target="_blank" rel="noopener">打开网站 ↗</a>
+          <a href="../" target="_blank" rel="noopener">打开网站 ↗</a>
           <button id="logout" type="button">清除 Token</button>
         </nav>
       </header>
@@ -24,7 +24,7 @@
         <div>
           <h2>连接 GitHub</h2>
           <p>
-            Token 只保存在当前浏览器的 <code>localStorage</code>，不会写入仓库。
+            Token 仅保留在当前页面内存，刷新即清除，不会写入仓库或持久保存。
             需要能读写 <code>No1Hoo/No1Hoo.github.io</code> 的 Contents 权限。
           </p>
         </div>
@@ -34,7 +34,7 @@
         </label>
         <div class="actions">
           <button id="load-live" type="button">读取线上内容</button>
-          <button id="save-token" type="button">保存 Token</button>
+          <button id="save-token" type="button">确认临时使用 Token</button>
         </div>
       </section>
 
@@ -71,6 +71,6 @@
       </section>
     </main>
 
-    <script type="module" src="/admin/admin.js"></script>
+    <script type="module" src="./admin.js"></script>
   </body>
 </html>
