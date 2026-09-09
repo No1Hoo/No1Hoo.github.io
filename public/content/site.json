@@ -133,7 +133,7 @@
     {
       "value": "2",
       "label": "第一作者论文",
-      "note": "包含在上述 9 篇中"
+      "note": "其中 SCI Q1 第一作者论文 1 篇"
     },
     {
       "value": "6",
@@ -142,6 +142,12 @@
     }
   ],
   "research": [
+    {
+      "title": "Safety evaluation and effects of dietary phlorotannins on the growth, health, and intestinal microbiota of Litopenaeus vannamei",
+      "note": "SCI Q1 · 第一作者",
+      "citation": "Fish and Shellfish Immunology · 2024 · 150: 109569",
+      "link": "https://doi.org/10.1016/j.fsi.2024.109569"
+    },
     {
       "title": "绿鳍马面鲀深远海养殖适应策略与关键技术研究进展",
       "note": "中文论文 · 第一作者"

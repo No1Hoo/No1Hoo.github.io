@@ -27,3 +27,13 @@ test('evidence counts distinguish applications from grants',()=>{
  assert.deepEqual(data.metrics.map(m=>m.value),['9','2','6']);
  assert.match(data.metrics[2].note,/5 件受理，1 件公开审中/);
 });
+test('Q1 first-author paper is the visible lead research item',()=>{
+ const html=renderSite(data);
+ assert.match(data.research[0].title,/^Safety evaluation/);
+ assert.equal(data.research[0].note,'SCI Q1 · 第一作者');
+ assert.equal(data.research[0].link,'https://doi.org/10.1016/j.fsi.2024.109569');
+ const featured=html.slice(html.indexOf('<article class="featured-paper"'),html.indexOf('<details class="research-details"'));
+ assert.ok(featured.includes(data.research[0].title));
+ assert.ok(!featured.includes('第三作者'));
+ assert.ok(html.indexOf(data.research[0].title)<html.indexOf('Macroalgae Improve'));
+});

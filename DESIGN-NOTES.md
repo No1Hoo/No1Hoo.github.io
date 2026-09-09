@@ -23,3 +23,7 @@ The selected direction keeps domain expertise as evidence while prioritizing tra
 Current resume and the user's latest locally extracted master ledger dated 2026-09-08 informed education, work, papers and patent status. Private source paths, certificate scans, raw project records and unpublished technical attachments are excluded from the repository. Patent counts refer to applications, not grants. No unverified journal metadata or quantitative impact was added.
 
 The old PDF remains available under its existing URL and is explicitly labelled historical. The JSON is the editable copy source. The build pre-renders the same copy for accessibility and JS/network failure; a later CMS-only edit refreshes browser copy, but needs a rebuild for static HTML and a redeploy for the Tencent mirror.
+
+## First-author paper correction — 2026-09-09
+
+The first-author SCI paper must lead the research section and be visible without expanding other publications. The supplied PDF's first page confirms Zijie Wu as first author, the complete title, Fish and Shellfish Immunology 150 (2024) 109569, and DOI 10.1016/j.fsi.2024.109569. The supplied Word document independently lists the same DOI. The Q1 label follows the user's explicit statement and the supplied “SCI Q1 一作” classification; it does not assert a particular JCR year/category or CAS zone. The third-author Macroalgae paper is retained only among additional outputs. Original PDFs/screenshots remain private.
